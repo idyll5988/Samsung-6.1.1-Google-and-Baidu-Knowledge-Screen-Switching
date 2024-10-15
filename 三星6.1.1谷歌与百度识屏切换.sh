@@ -4,10 +4,12 @@ while true;
 do input="$(timeout 0.1 getevent -l|grep -Eo 'VOLUMEUP|VOLUMEDOWN'|head -n1)";
 if [ "$input" = "VOLUMEUP" ];then 
 echo "   已选定 : 谷歌\n";
+su -c pm enable "com.google.android.googlequicksearchbox"
 su -c cmd settings put secure cn_support_circe_to_search 1
 break;
 elif [ "$input" = "VOLUMEDOWN" ];then 
 echo "   已选定 : 百度\n";
+su -c pm disable "com.google.android.googlequicksearchbox"
 su -c cmd settings put secure cn_support_circe_to_search 0
 break;
 fi;
